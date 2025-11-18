@@ -3,8 +3,7 @@ import meGif from './assets/me.gif';
 import meirl2 from './assets/meirl2.jpg';
 import meDrawn from './assets/meDrawn.jpg';
 import arrow from './assets/arrow.gif';
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ScratchReveal from "./ScratchReveal";
 
 
@@ -38,6 +37,23 @@ const handleGifClick = () => {
     setShowBubble(false);
   }, 2500);
 };
+
+// Projects CS
+const [showCS, setShowCS] = useState(false);
+const containerRef = useRef(null);
+
+useEffect(() => {
+  const container = containerRef.current;
+  if (showCS) {
+    container.style.maxHeight = container.scrollHeight + 1000 + "px";
+  } else {
+    container.style.maxHeight = container.scrollHeight + "px"; // start from current
+    requestAnimationFrame(() => {
+      container.style.maxHeight = "0"; // collapse
+    });
+  }
+}, [showCS]);
+
 
 
   return (
@@ -75,30 +91,51 @@ const handleGifClick = () => {
 
       <main>
         <section>
-  <h2 className="outfit">About Me</h2>
-    <div className="about-container">
-    <div className="bubble-image">
-      <ScratchReveal
-        topImage={meDrawn}
-        bottomImage={meirl2}
-        width={300}
-        height={300}
-      />
-    </div>
-    <img src={arrow} className="arrow"/>
-     <p className="text-gap">memememememe</p>
-  </div>
-</section>
-
+          <h2 className="outfit">About Me</h2>
+            <div className="about-container">
+              <div className="bubble-image">
+                <ScratchReveal
+                  topImage={meDrawn}
+                  bottomImage={meirl2}
+                  width={300}
+                  height={300}
+                />
+              </div>
+              <img src={arrow} className="arrow"/>
+              <p className="text-gap">memememememe</p>
+            </div>
+        </section>
 
         <section>
           <h2 className="outfit">Projects</h2>
           <div className="project-category-buttons">
-            <button className="category-btn">CS</button>
+            <button className="category-btn" onClick={() => setShowCS(prev => !prev)}>
+              CS
+            </button>
             <button className="category-btn">ARCHITECTURE</button>
             <button className="category-btn">OTHER</button>
           </div>
-          <p>projects!</p>
+
+          <div
+            ref={containerRef}
+            className={`cs-card-container ${showCS ? "show" : ""}`}
+            style={{ overflow: "hidden", transition: "max-height 0.5s ease" }}
+          >
+            {[...Array(3)].map((_, i) => (
+              <div className="cs-card" key={i}>
+              <div className="cs-card-header">Project {i + 1}</div>
+              <div className="cs-card-content">
+                <p>
+                  projects
+                </p>
+              </div>
+              <div className="cs-card-footer">
+                <button>View</button>
+                <button>Code</button>
+              </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section>

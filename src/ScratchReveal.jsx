@@ -59,7 +59,6 @@ export default function ScratchReveal({ topImage, bottomImage, width = 400, heig
           top: 0,
           left: 0,
           zIndex: 1,
-          cursor: "crosshair"
         }}
       />
     </div>
