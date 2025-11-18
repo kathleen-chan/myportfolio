@@ -2,12 +2,14 @@ import starGif from './assets/star.gif';
 import meGif from './assets/me.gif';
 import meirl2 from './assets/meirl2.jpg';
 import meDrawn from './assets/meDrawn.jpg';
+import arrow from './assets/arrow.gif';
 import { useState } from "react";
 import { useEffect } from "react";
 import ScratchReveal from "./ScratchReveal";
 
 
 function App() {
+  // Cursor stars
   useEffect(() => {
   const handleMove = (e) => {
     const star = document.createElement("img");
@@ -20,7 +22,6 @@ function App() {
 
     document.body.appendChild(star);
 
-    // Remove after animation
     setTimeout(() => star.remove(), 600);
   };
 
@@ -29,11 +30,10 @@ function App() {
   return () => window.removeEventListener("mousemove", handleMove);
 }, []);
 
+// Speech bubble
 const [showBubble, setShowBubble] = useState(false);
-
 const handleGifClick = () => {
   setShowBubble(true);
-
   setTimeout(() => {
     setShowBubble(false);
   }, 2500);
@@ -76,22 +76,28 @@ const handleGifClick = () => {
       <main>
         <section>
   <h2 className="outfit">About Me</h2>
-
-  <div className="bubble-image">
-    <ScratchReveal
-      topImage={meDrawn}
-      bottomImage={meirl2}
-      width={300}
-      height={300}
-    />
+    <div className="about-container">
+    <div className="bubble-image">
+      <ScratchReveal
+        topImage={meDrawn}
+        bottomImage={meirl2}
+        width={300}
+        height={300}
+      />
+    </div>
+    <img src={arrow} className="arrow"/>
+     <p className="text-gap">memememememe</p>
   </div>
-
-  <p>memememememe</p>
 </section>
 
 
         <section>
           <h2 className="outfit">Projects</h2>
+          <div className="project-category-buttons">
+            <button className="category-btn">CS</button>
+            <button className="category-btn">ARCHITECTURE</button>
+            <button className="category-btn">OTHER</button>
+          </div>
           <p>projects!</p>
         </section>
 
