@@ -1,7 +1,11 @@
 import starGif from './assets/star.gif';
 import meGif from './assets/me.gif';
+import meirl2 from './assets/meirl2.jpg';
+import meDrawn from './assets/meDrawn.jpg';
 import { useState } from "react";
 import { useEffect } from "react";
+import ScratchReveal from "./ScratchReveal";
+
 
 function App() {
   useEffect(() => {
@@ -71,17 +75,28 @@ const handleGifClick = () => {
 
       <main>
         <section>
-          <h2>About Me</h2>
-          <p>memememememe</p>
-        </section>
+  <h2 className="outfit">About Me</h2>
+
+  <div className="bubble-image">
+    <ScratchReveal
+      topImage={meDrawn}
+      bottomImage={meirl2}
+      width={300}
+      height={300}
+    />
+  </div>
+
+  <p>memememememe</p>
+</section>
+
 
         <section>
-          <h2>Projects</h2>
+          <h2 className="outfit">Projects</h2>
           <p>projects!</p>
         </section>
 
         <section>
-          <h2>Contact</h2>
+          <h2 className="outfit">Contact</h2>
           <p>brrbrr</p>
         </section>
       </main>
