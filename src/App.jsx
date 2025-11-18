@@ -1,0 +1,92 @@
+import starGif from './assets/star.gif';
+import meGif from './assets/me.gif';
+import { useState } from "react";
+import { useEffect } from "react";
+
+function App() {
+  useEffect(() => {
+  const handleMove = (e) => {
+    const star = document.createElement("img");
+    star.src = starGif;
+    star.className = "cursor-star";
+
+    star.style.left = e.clientX + "px";
+    star.style.top = e.clientY + "px";
+    star.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+
+    document.body.appendChild(star);
+
+    // Remove after animation
+    setTimeout(() => star.remove(), 600);
+  };
+
+  window.addEventListener("mousemove", handleMove);
+
+  return () => window.removeEventListener("mousemove", handleMove);
+}, []);
+
+const [showBubble, setShowBubble] = useState(false);
+
+const handleGifClick = () => {
+  setShowBubble(true);
+
+  setTimeout(() => {
+    setShowBubble(false);
+  }, 2500);
+};
+
+
+  return (
+    <div className="app-container">
+      <img src={meGif} className="me-gif" onClick={(handleGifClick) }
+      style={{ cursor: "pointer" }}/>
+    {/* Speech Bubble */}
+    {showBubble && (<div className="speech-bubble"> hello~! 🌸 <br/> ໒꒰@` ˘ `@ ꒱ა
+    </div>
+    )}
+      <div className="grid-background"></div>
+
+      {/* Navbar */}
+      <nav className="navbar-buttons outfit">
+        <a href="#home" className="nav-button">HOME</a>
+        <a href="#about" className="nav-button">ABOUT ME</a>
+        <a href="#projects" className="nav-button">PROJECTS</a>
+      </nav>
+
+      {/* Home */}
+      <header className="hachi-maru-pop-regular">
+        <section className="bubble-section">
+          <div className="bubble-background"></div>
+          
+          {/* Stars */}
+          <img src={starGif} className="star-img" style={{ top: '10%', left: '10%', transform: 'rotate(-10deg)' }}/>
+          <img src={starGif} className="star-img" style={{ top: '15%', left: '80%', transform: 'rotate(20deg)' }}/>
+          <img src={starGif} className="star-img" style={{ top: '90%', left: '35%', transform: 'rotate(8deg)',  }}/>
+
+          <div className="text-content">
+            <h1>My Portfolio</h1>
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section>
+          <h2>About Me</h2>
+          <p>memememememe</p>
+        </section>
+
+        <section>
+          <h2>Projects</h2>
+          <p>projects!</p>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p>brrbrr</p>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default App;
