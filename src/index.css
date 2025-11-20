@@ -224,11 +224,10 @@ header {
   gap: 20px;
   margin-left: 60px;
   margin-top: 10px;
-  margin-bottom: 25px;
 }
 
 .category-btn {
-  background: transparent;
+  background-color: #fdd6c4;
   border: 1px solid #422400;
   color: #422400;
   padding: 8px 10px;
@@ -248,28 +247,28 @@ header {
 /*Projects: CS*/
 .cs-card-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-  margin-left: 60px;
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-left: 46px;
+  overflow: visible;
   max-height: 0; /* collapsed initially */
-  transition: max-height 0.5s ease;
+  transition: all 0.5s ease;
+  padding-bottom: 50px;
+  justify-content: center;
+}
+
+.cs-card-container.show {
+  max-height: 1100px;
 }
 
 .cs-card {
+  position: relative;
   width: 300px;
-  height: 200px;
-  margin-top: 10px;
-  margin-left: 10px;
   background: #fdf0e0;
   border-radius: 13px;
   border: 1px solid #422400;
-  opacity: 0;
   transform: translateY(40px) scale(0.9);
-  transition: 
-    opacity 0.4s ease,
-    transform 0.4s ease;
+  transition: 0.4s ease,
 }
 
 .cs-card-header {
@@ -288,6 +287,13 @@ header {
   flex-grow: 1;
 }
 
+.cs-card-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .cs-card-footer {
   padding: 8px 12px;
   border-top: 1px solid #a07044;
@@ -296,27 +302,114 @@ header {
   gap: 10px;
 }
 
-/* Animate each card staggered like a deck */
-.cs-card-container.show .cs-card:nth-child(1) {
-  opacity: 1;
-  transform: translateY(0) rotate(-3deg) scale(1);
-  transition-delay: 0.05s;
-}
-.cs-card-container.show .cs-card:nth-child(2) {
-  opacity: 1;
-  transform: translateY(20px) rotate(1deg) scale(1);
-  transition-delay: 0.15s;
-}
-.cs-card-container.show .cs-card:nth-child(3) {
-  opacity: 1;
-  transform: translateY(40px) rotate(-1deg) scale(1);
-  transition-delay: 0.25s;
-  margin-bottom: 50px;
+.cs-card-footer button {
+  background-color: #fdd6c4;
+  border: 1px solid #422400;
+  color: #422400;
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-family: "Outfit", sans-serif;
+  font-size: 12px;
+  cursor: none;                   
+  transition: 0.2s ease, transform 0.2s ease;
 }
 
+.cs-card-footer button:hover {
+  background-color: #fdd9ca;    
+  transform: scale(1.05);
+  cursor: none;
+}
+
+/* Projects: Archi */
+.arch-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-left: 60px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  overflow: visible;
+  max-height: 0;
+  transition: 0.5s ease;  
+  padding-bottom: 50px;
+  justify-content: center;
+}
+
+.arch-card-container.show {
+  max-height: 2000px;
+}
+
+/* Card base */
+.arch-card {
+  position: relative;
+  width: 280px;
+  padding: 10px;
+  background: #fffdf7;
+  border: 1px solid #c9b29b;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: 0.4s ease;
+}
+
+.arch-card-container.show .arch-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Tape pieces */
+.tape {
+  position: absolute;
+  width: 70px;
+  height: 30px;
+  background: #f5e4a3; /* masking tape color */
+  opacity: 0.8;
+  transform: rotate(-6deg);
+  z-index: 10;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px #c2b18688;
+}
+
+.tape.top-left {
+  top: -12px;
+  left: -10px;
+}
+
+.tape.top-right {
+  top: -12px;
+  right: -10px;
+  transform: rotate(6deg);
+}
+
+/* Content */
+.arch-card-header {
+  font-weight: bold;
+  background: none;
+  font-size: 16px;
+  color: #4d3b2a;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.arch-card-content img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.arch-card-footer {
+  height: 45px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
 h2{
   margin-left: 60px;
+  color: #422400;
   font-size: xx-large;
 }
 
