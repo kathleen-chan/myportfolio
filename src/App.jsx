@@ -90,6 +90,11 @@ function App() {
     }
   }, [showArch]);
 
+  /* Makes picures larger in projects */
+  const [lightboxImage, setLightboxImage] = useState(null);
+  const openLightbox = (img) => setLightboxImage(img);
+  const closeLightbox = () => setLightboxImage(null);
+
   return (
     <div className="app-container">
       <img
@@ -150,7 +155,7 @@ function App() {
 
       <main>
         <section>
-          <h2 className="outfit">About Me</h2>
+          <h2 className="outfit center">About Me</h2>
           <div className="about-container">
             <div className="bubble-image">
               <ScratchReveal
@@ -165,8 +170,9 @@ function App() {
           </div>
         </section>
 
+        {/*Projects CS*/}
         <section>
-          <h2 className="outfit">Projects</h2>
+          <h2 className="outfit center">Projects</h2>
           <div className="project-category-buttons">
             <button
               className="category-btn"
@@ -183,7 +189,6 @@ function App() {
             <button className="category-btn">OTHER</button>
           </div>
 
-          {/*Projects CS*/}
           <div
             ref={containerRef}
             className={`cs-card-container ${showCS ? "show" : ""}`}
@@ -193,7 +198,11 @@ function App() {
               <div className="cs-card" key={i}>
                 <div className="cs-card-header">Project {i + 1}</div>
                 <div className="cs-card-content">
-                  <img src={project.image} alt={project.name} />
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    onClick={() => setLightboxImage(project.image)}
+                  />
                 </div>
                 <div className="cs-card-footer">
                   <button>View</button>
@@ -210,23 +219,40 @@ function App() {
           >
             {architectureProjects.map((project, i) => (
               <div className="arch-card" key={i}>
-                {/* Fake tape pieces */}
+                {/* Tape pieces */}
                 <div className="tape top-left"></div>
                 <div className="tape top-right"></div>
 
                 <div className="arch-card-header">{project.name}</div>
                 <div className="arch-card-content">
-                  <img src={project.image} alt={project.name} />
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    onClick={() => setLightboxImage(project.image)}
+                  />
                 </div>
-                <div className="arch-card-footer">
-                </div>
+                <div className="arch-card-footer"></div>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Lightbox */}
+        {lightboxImage && (
+          <div
+            className="lightbox-overlay"
+            onClick={() => setLightboxImage(null)}
+          >
+            <img
+              className="lightbox-image"
+              src={lightboxImage}
+              alt="Large view"
+            />
+          </div>
+        )}
+
         <section>
-          <h2 className="outfit">Contact</h2>
+          <h2 className="outfit center">Contact</h2>
           <p>brrbrr</p>
         </section>
       </main>
