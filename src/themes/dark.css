@@ -1,0 +1,217 @@
+.staatliches-regular {
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.boldonse-regular {
+  font-family: "Boldonse", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pinyon-script-regular {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dotgothic16-regular {
+  font-family: "DotGothic16", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "pixel";
+  src: url("../assets/fonts/AestheticPixel-Regular.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.pixel {
+  font-family: "pixel", monospace;
+}
+
+@font-face {
+  font-family: "oblique";
+  src: url("../assets/fonts/06-Oblique.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.oblique {
+  font-family: "oblique", cursive;
+}
+
+@font-face {
+  font-family: "brogetta";
+  src: url("../assets/fonts/BROGETTA-Regular.otf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.brogetta {
+  font-family: "brogetta", sans-serif;
+}
+
+
+
+/* Cursor */
+.cursor {
+  position: fixed;
+  width: 50px;
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  animation: starFade 0.3s forwards;
+  z-index: 9999;
+}
+
+
+@keyframes starFade {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+
+
+
+
+.dark-app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  font-family: "Outfit", sans-serif;
+}
+
+.dark-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  justify-content: center; /* center vertically */
+  align-items: center;     /* center horizontally */
+  gap: -10px;               /* space between lines */
+  background-color: #000000;
+  color: #fff;
+  text-align: center;
+}
+
+
+.glass-navbar {
+  position: fixed;       /* Sticks to top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(10px); /* frosted glass effect */
+  background-color: rgba(255, 255, 255, 0.05); /* transparent glass */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* subtle border */
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glass-navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+  cursor: none;
+}
+
+.glass-navbar .nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-family: "montserrat";
+  transition: 0.3s ease;
+  cursor: none;
+}
+
+.glass-navbar .nav-links li a:hover {
+  color: #fff;
+  cursor: none;
+}
+
+
+
+
+
+.dark-main {
+  flex: 1;
+  padding: 20px;
+  background-color: #1a1a1a;
+}
+
+.kathleen {
+    font-size: 50px;
+    margin-left: 0px;
+}
+
+.portfolio {
+    font-size: 200px;
+    margin-top: -40px;
+}
+
+.chan {
+    font-size: 50px;
+    margin-top: -30px;
+}
+
+
+.dark-about, .dark-projects {
+  margin-bottom: 40px;
+}
+
+.dark-about h2, .dark-projects h2 {
+  color: #f9d28e;
+}
+
+.dark-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dark-card {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1 0 200px;
+  text-align: center;
+}
+
+.dark-footer {
+  padding: 20px;
+  background-color: #222;
+  text-align: center;
+  color: #f9d28e;
+}
+
+/* Button inside dark theme */
+.dark-about button {
+  background-color: #444;
+  color: #f9d28e;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dark-about button:hover {
+  background-color: #666;
+}
