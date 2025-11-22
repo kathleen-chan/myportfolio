@@ -1,15 +1,4 @@
-.staatliches-regular {
-  font-family: "Staatliches", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.boldonse-regular {
-  font-family: "Boldonse", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
+/* Fonts*/
 .pinyon-script-regular {
   font-family: "Pinyon Script", cursive;
   font-weight: 400;
@@ -28,7 +17,6 @@
   font-weight: 100;
   font-style: normal;
 }
-
 
 @font-face {
   font-family: "pixel";
@@ -63,8 +51,6 @@
   font-family: "brogetta", sans-serif;
 }
 
-
-
 /* Cursor */
 .cursor {
   position: fixed;
@@ -77,50 +63,71 @@
   z-index: 9999;
 }
 
-
 @keyframes starFade {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
 }
-
-
-
-
 
 .dark-app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #000000;
-  font-family: "Outfit", sans-serif;
 }
 
 .dark-header {
   min-height: 100vh;
+  position: relative;
+  overflow: visible;
   display: flex;
-  flex-direction: column; /* stack vertically */
-  justify-content: center; /* center vertically */
-  align-items: center;     /* center horizontally */
-  gap: -10px;               /* space between lines */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
   background-color: #000000;
   color: #fff;
   text-align: center;
 }
 
+.lock-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
 
+.cut-line {
+  position: fixed;
+  width: 6px;
+  height: 0px;
+  background: white;
+  opacity: 0;
+  transform-origin: center center;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+}
+
+/* Navbar */
 .glass-navbar {
-  position: fixed;       /* Sticks to top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 15px 30px;
   display: flex;
-  justify-content: center;
-  backdrop-filter: blur(10px); /* frosted glass effect */
-  background-color: rgba(255, 255, 255, 0.05); /* transparent glass */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* subtle border */
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background-color: #ffffff11;
   z-index: 1000;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Add this */
+}
+
+.nav-name {
+  font-size: 18px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 
 .glass-navbar .nav-links {
@@ -129,12 +136,13 @@
   gap: 50px;
   margin: 0;
   padding: 0;
+  margin-left: auto; /* Push nav-links to the right */
   cursor: none;
 }
 
 .glass-navbar .nav-links li a {
   text-decoration: none;
-  color: white;
+  color: #fff;
   font-family: "montserrat";
   transition: 0.3s ease;
   cursor: none;
@@ -145,31 +153,44 @@
   cursor: none;
 }
 
-
-
-
-
 .dark-main {
   flex: 1;
   padding: 20px;
-  background-color: #1a1a1a;
+  background-color: #000000;
 }
 
 .kathleen {
-    font-size: 50px;
-    margin-left: 0px;
+  font-size: 30px;
+  margin-left: -160px;
+  position: relative;
+  z-index: 2000;
 }
 
-.portfolio {
-    font-size: 200px;
-    margin-top: -40px;
+.title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+}
+
+.portf {
+  font-size: 200px;
+  margin-top: -100px;
+  margin-bottom: -80px;
+}
+
+.olio {
+  font-size: 200px;
+  margin-top: -100px;
+  margin-bottom: -80px;
 }
 
 .chan {
-    font-size: 50px;
-    margin-top: -30px;
+  font-size: 30px;
+  margin-left: 270px;
+  position: relative;
+  z-index: 2000;
 }
-
 
 .dark-about, .dark-projects {
   margin-bottom: 40px;
@@ -202,7 +223,6 @@
   color: #f9d28e;
 }
 
-/* Button inside dark theme */
 .dark-about button {
   background-color: #444;
   color: #f9d28e;
