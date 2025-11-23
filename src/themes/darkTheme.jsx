@@ -1,5 +1,7 @@
 import "./dark.css";
 import cursor from "../assets/cursor.png";
+import gsap from "gsap";
+import SplitText from "gsap/SplitText";
 import { useState, useEffect, useRef } from "react";
 
 export default function DarkTheme() {
@@ -12,6 +14,9 @@ export default function DarkTheme() {
   const chanRef = useRef(null);
   const titleRowRef = useRef(null);
   const navNameRef = useRef(null);
+  const aboutRef1 = useRef(null);
+  const aboutRef2 = useRef(null);
+  const aboutRef3 = useRef(null);
 
   /* Cursor Effect */
   useEffect(() => {
@@ -208,6 +213,27 @@ export default function DarkTheme() {
     return () => document.body.classList.remove("lock-scroll");
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible"); // remove when scrolling out
+          }
+        });
+      },
+      { threshold: 0.2 } // triggers when 20% visible
+    );
+
+    [aboutRef1, aboutRef2, aboutRef3].forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="dark-app-container">
       <header className="dark-header" ref={headerRef}>
@@ -231,9 +257,18 @@ export default function DarkTheme() {
       </nav>
 
       <main className="dark-main">
-        <section className="dark-about" id="about">
-          <h2>About Me</h2>
-          <p>Completely different dark theme layout.</p>
+        <section className="dark-about montserrat center">
+          <h2 ref={aboutRef1} className="aboutMe float-up text-scramble">
+            A designer, explorer, and creator moving between the constellations 
+            of UX/UI, web, game, and product design.
+          </h2>
+          <h2 ref={aboutRef2} className="aboutMe-kat pinyon-script-regular float-up">
+            Kathleen.
+          </h2>
+          <p ref={aboutRef3} className="aboutMe-kat2 pixel float-up">
+          I am passionate about creating meaningful digital 
+          experiences where imagination and technical craft meet.
+          </p>
           <button onClick={() => setShowSecret((prev) => !prev)}>
             Reveal Secret
           </button>
