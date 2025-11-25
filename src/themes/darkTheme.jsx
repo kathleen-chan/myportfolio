@@ -27,6 +27,7 @@ export default function DarkTheme() {
   const techRef = useRef(null);
   const projectsRef = useRef(null);
   const projectCardsRef = useRef([]);
+  const diamondRef = useRef(null);
 
   /* Cursor Effect */
   useEffect(() => {
@@ -237,11 +238,11 @@ export default function DarkTheme() {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
           } else {
-            entry.target.classList.remove("visible"); // remove when scrolling out
+            entry.target.classList.remove("visible");
           }
         });
       },
-      { threshold: 0.5 } // triggers when 20% visible
+      { threshold: 0.5 }
     );
 
     [aboutRef1, aboutRef2, aboutRef3].forEach((ref) => {
@@ -251,51 +252,197 @@ export default function DarkTheme() {
     return () => observer.disconnect();
   }, []);
 
-  // Projects
-useEffect(() => {
-  const cards = document.querySelectorAll(".dark-card");
-  const rotations = [-5, 0, 5];
-  const handleScrollAnimation = () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Only animate if the card is not already animated
-          if (!entry.target.classList.contains('animated')) {
-            entry.target.classList.add('animated'); // Mark as animated
-
-            const rotation = rotations[Math.floor(Math.random() * rotations.length)];
-
-            gsap.to(entry.target, {
-              y: 0, 
-              opacity: 1,
-              rotation: rotation,  
-              duration: 1,
-              ease: "power3.out", 
-            });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
           }
-        } else {
-          // When the card goes out of view, remove the animated class to trigger the animation again when in view
-          entry.target.classList.remove('animated');
-        }
-      });
-    }, { threshold: 0.2 }); // Set the threshold to trigger when 30% of the card is visible
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-    // Observe all cards
-    cards.forEach(card => observer.observe(card));
+    [aboutRef1, aboutRef2, aboutRef3].forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    [aboutRef1, aboutRef2, aboutRef3].forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Scroll animation for "imagination" moving towards "technical craft"
+  useEffect(() => {
+    let animationEnabled = false;
+    let scrollLocked = false;
+    let accumulatedScroll = 0;
+    let cursorShown = false;
+
+    const checkIfCentered = () => {
+      const imagination = imaginationRef.current;
+      if (!imagination) return;
+
+      const imaginationRect = imagination.getBoundingClientRect();
+      const elementCenter = imaginationRect.top + imaginationRect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+
+      if (Math.abs(elementCenter - viewportCenter) <= 60) {
+        animationEnabled = true;
+        scrollLocked = true;
+        document.body.classList.add("lock-scroll");
+      }
+    };
+
+    const handleWheel = (e) => {
+      if (!scrollLocked) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const imagination = imaginationRef.current;
+      const tech = techRef.current;
+      const diamond = diamondRef.current;
+
+      if (!imagination || !tech || !diamond) return;
+
+      // Accumulate scroll
+      accumulatedScroll += e.deltaY;
+
+      const imaginationRect = imagination.getBoundingClientRect();
+      const techRect = tech.getBoundingClientRect();
+
+      // Calculate initial positions (store on first run)
+      if (!imagination.dataset.initialTop) {
+        imagination.dataset.initialTop = imaginationRect.top + window.scrollY;
+      }
+
+      const initialTop = parseFloat(imagination.dataset.initialTop);
+      const targetTop = techRect.top + window.scrollY;
+
+      // Calculate the distance to travel
+      const travelDistance = targetTop - initialTop;
+
+      // Calculate progress based on accumulated scroll
+      const scrollNeeded = 1000; // Total scroll amount needed to complete animation
+      let progress = accumulatedScroll / scrollNeeded;
+      progress = Math.max(0, Math.min(1, progress));
+
+      // Calculate current vertical position of imagination element
+      const translateY = travelDistance * progress;
+
+      // Update imagination position
+      imagination.style.transform = `translateY(${translateY}px)`;
+      imagination.style.position = "relative";
+
+      // Position the cursor image just below the "imagination" element
+      const cursorPositionY = imaginationRect.bottom + window.scrollY;
+      if (progress >= 1 && !cursorShown && diamond) {
+        cursorShown = true;
+        diamond.style.opacity = "1"; // Fade in
+        diamond.style.position = "absolute"; // Position it absolutely
+        diamond.style.top = `${cursorPositionY}px`; // Position it right below imagination
+        diamond.style.left = `49%`;
+        diamond.style.transition = "transform 1s ease-out"; // Apply transition for smooth movement
+      }
+
+      // Animate the cursor image's downward movement
+      if (progress >= 1) {
+        // Animate the cursor image's downward "shoot" effect
+        diamond.style.transform = `translateY(1000px)`; // Adjust the "100px" to control the speed of the shoot down
+      }
+
+      // When animation is complete, unlock scroll
+      if (progress >= 1) {
+        scrollLocked = false;
+        document.body.classList.remove("lock-scroll");
+      }
+    };
+
+    const handleScroll = () => {
+      if (scrollLocked) return;
+
+      if (!animationEnabled) {
+        checkIfCentered();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    handleScroll(); // Initial call
 
     return () => {
-      // Cleanup observer when the component unmounts
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleWheel);
+      document.body.classList.remove("lock-scroll");
     };
-  };
-  handleScrollAnimation();
-}, []);
+  }, []);
 
+  // Projects
+  useEffect(() => {
+    const cards = document.querySelectorAll(".dark-card");
+    const rotations = [-5, 0, 5];
+    const handleScrollAnimation = () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Only animate if the card is not already animated
+              if (!entry.target.classList.contains("animated")) {
+                entry.target.classList.add("animated"); // Mark as animated
 
+                const rotation =
+                  rotations[Math.floor(Math.random() * rotations.length)];
 
+                gsap.to(entry.target, {
+                  y: 0,
+                  opacity: 1,
+                  rotation: rotation,
+                  duration: 1,
+                  ease: "power3.out",
+                });
+              }
+            } else {
+              // When the card goes out of view, remove the animated class to trigger the animation again when in view
+              entry.target.classList.remove("animated");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      ); // Set the threshold to trigger when 30% of the card is visible
 
+      // Observe all cards
+      cards.forEach((card) => observer.observe(card));
 
-
+      return () => {
+        // Cleanup observer when the component unmounts
+        observer.disconnect();
+      };
+    };
+    handleScrollAnimation();
+  }, []);
 
   return (
     <div className="dark-app-container">
@@ -357,6 +504,7 @@ useEffect(() => {
           <p ref={techRef} className="tech brogetta">
             technical craft.
           </p>
+          <img src={cursor} ref={diamondRef} className="diamond" alt="Cursor" />
 
           {/*
           <button onClick={() => setShowSecret((prev) => !prev)}>
@@ -393,7 +541,9 @@ useEffect(() => {
                 <img src={brainrot} />
               </div>
               <h3 className="project-title pixel">Brainrot!..ish</h3>
-              <p className="desc pixel">Design and integration of interactive multiplayer minigames.</p>
+              <p className="desc pixel">
+                Design and integration of interactive multiplayer minigames.
+              </p>
             </div>
           </div>
         </section>
