@@ -1,0 +1,45 @@
+.glass-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background-color: #ffffff11;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-name {
+  font-size: 22px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.glass-navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  cursor: none;
+}
+
+.glass-navbar .nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: "montserrat";
+  transition: 0.3s ease;
+  cursor: none;
+}
+
+.glass-navbar .nav-links li a:hover {
+  color: #fff;
+  cursor: none;
+}

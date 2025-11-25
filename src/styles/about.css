@@ -1,0 +1,98 @@
+.dark-main {
+  flex: 1;
+  padding: 20px;
+  background-color: #000000;
+}
+
+.dark-about {
+  margin-bottom: 40px;
+}
+
+/* Float-up animation */
+.float-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.float-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aboutMe {
+  color: #fff;
+}
+
+.aboutMe-kat {
+  position: relative;
+  margin-top: -60px;
+  margin-bottom: -20px;
+  z-index: 10;
+  text-align: center;
+  font-size: 80px;
+  color: #e6addc;
+}
+
+.aboutMe-kat2 {
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}
+
+.imagination {
+  position: relative;
+  text-align: center;
+  margin-top: -10px;
+  display: inline-block;
+  font-size: 40px;
+  white-space: nowrap;
+  color: #e6addc;
+}
+
+.meets {
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  margin-top: -30px;
+}
+
+.imag-char {
+  display: inline-block;
+  opacity: 0;
+}
+
+.tech {
+  position: relative;
+  text-align: center;
+  font-size: 35px;
+  color: #e6addc;
+  margin-top: -10px;
+}
+
+.diamond {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.diamond.visible {
+  opacity: 1;
+}
+
+.dark-about button {
+  background-color: #444;
+  color: #f9d28e;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dark-about button:hover {
+  background-color: #666;
+}

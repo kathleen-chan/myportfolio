@@ -1,0 +1,89 @@
+.dark-projects {
+  position: relative;
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.projects {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.pro {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 100px;  
+}
+
+.jects {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size: 100px;
+}
+
+.project-title {
+  color: white;
+  font-size: 25px;
+}
+
+.dark-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+.dark-card {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  margin-top: -150px;
+  width: 350px;
+  height: 420px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-card:hover {
+  transform: translateY(-10px) rotate(0deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.project-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 0px;
+}
+
+.desc {
+  font-size: 1rem;
+  padding: 20px;
+  color: #fff;
+  margin-top: -30px;
+}
+
+.dark-card:nth-child(1) {
+  z-index: 3;
+}
+
+.dark-card:nth-child(2) {
+  z-index: 2;
+}
+
+.dark-card:nth-child(3) {
+  z-index: 1;
+}

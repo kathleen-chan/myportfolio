@@ -1,0 +1,18 @@
+.slider-container {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  gap: 2rem;
+}
+
+.slider-card {
+  min-width: 300px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(100%);
+  cursor: pointer;
+}

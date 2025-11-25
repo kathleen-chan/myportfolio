@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import DarkTheme from "./themes/darkTheme";
+import DarkTheme from "./components/darkTheme";
 import LightTheme from "./themes/lightTheme";
 
 export default function App() {
