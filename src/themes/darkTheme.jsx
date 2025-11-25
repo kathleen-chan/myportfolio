@@ -1,4 +1,9 @@
 import "./dark.css";
+
+import umi from "../assets/u-mi.jpg";
+import brainrot from "../assets/brainrot!...ish.png";
+import oubaitori from "../assets/oubaitori.jpg";
+
 import cursor from "../assets/cursor.png";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
@@ -17,6 +22,11 @@ export default function DarkTheme() {
   const aboutRef1 = useRef(null);
   const aboutRef2 = useRef(null);
   const aboutRef3 = useRef(null);
+  const imaginationRef = useRef(null);
+  const meetsRef = useRef(null);
+  const techRef = useRef(null);
+  const projectsRef = useRef(null);
+  const projectCardsRef = useRef([]);
 
   /* Cursor Effect */
   useEffect(() => {
@@ -26,7 +36,9 @@ export default function DarkTheme() {
       star.className = "cursor";
       star.style.left = e.clientX + "px";
       star.style.top = e.clientY + "px";
-      star.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+      star.style.transform = `translate(-50%, -50%) rotate(${
+        Math.random() * 360
+      }deg)`;
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 600);
     };
@@ -67,7 +79,9 @@ export default function DarkTheme() {
         cutLine.style.left = centerX + "px";
         cutLine.style.opacity = 1;
         cutLine.style.height = `${maxLength}px`;
-        cutLine.style.transform = `translate(-50%, -50%) rotate(${italicAngle}deg) scaleY(${length / maxLength})`;
+        cutLine.style.transform = `translate(-50%, -50%) rotate(${italicAngle}deg) scaleY(${
+          length / maxLength
+        })`;
 
         if (length >= maxLength) {
           stretchDone = true;
@@ -79,7 +93,8 @@ export default function DarkTheme() {
       // --- Phase 2: Rotate ---
       if (stretchDone && !rotationDone) {
         const rotateProgress = progress;
-        const rotation = italicAngle + (finalAngle - italicAngle) * rotateProgress;
+        const rotation =
+          italicAngle + (finalAngle - italicAngle) * rotateProgress;
         cutLine.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scaleY(1)`;
 
         if (rotateProgress >= 1) {
@@ -130,7 +145,8 @@ export default function DarkTheme() {
           const startX = pullBackDistance;
           const startY = pullBackDistance * 0.5;
           const offsetX = startX - (startX + shootForwardDistance) * easeIn;
-          const offsetY = startY - (startY + shootForwardDistance * 0.5) * easeIn;
+          const offsetY =
+            startY - (startY + shootForwardDistance * 0.5) * easeIn;
 
           cutLine.style.transform = `
             translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))
@@ -178,7 +194,8 @@ export default function DarkTheme() {
             const chanCenterX = chanRect.left + chanRect.width / 2;
             const chanCenterY = chanRect.top + chanRect.height / 2;
             const chanFinalWidth = chanRect.width * scaleFactor;
-            const chanTargetCenterX = targetX + kathleenFinalWidth + 5 + chanFinalWidth / 2;
+            const chanTargetCenterX =
+              targetX + kathleenFinalWidth + 5 + chanFinalWidth / 2;
             const chanDeltaX = chanTargetCenterX - chanCenterX;
             const chanDeltaY = targetY - chanCenterY;
 
@@ -196,7 +213,7 @@ export default function DarkTheme() {
               kathleen.style.opacity = 0;
               chan.style.opacity = 0;
               document.body.classList.remove("lock-scroll");
-          });
+            });
           }
         }
 
@@ -224,7 +241,7 @@ export default function DarkTheme() {
           }
         });
       },
-      { threshold: 0.2 } // triggers when 20% visible
+      { threshold: 0.5 } // triggers when 20% visible
     );
 
     [aboutRef1, aboutRef2, aboutRef3].forEach((ref) => {
@@ -234,53 +251,150 @@ export default function DarkTheme() {
     return () => observer.disconnect();
   }, []);
 
+  // Projects
+useEffect(() => {
+  const cards = document.querySelectorAll(".dark-card");
+  const rotations = [-5, 0, 5];
+  const handleScrollAnimation = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Only animate if the card is not already animated
+          if (!entry.target.classList.contains('animated')) {
+            entry.target.classList.add('animated'); // Mark as animated
+
+            const rotation = rotations[Math.floor(Math.random() * rotations.length)];
+
+            gsap.to(entry.target, {
+              y: 0, 
+              opacity: 1,
+              rotation: rotation,  
+              duration: 1,
+              ease: "power3.out", 
+            });
+          }
+        } else {
+          // When the card goes out of view, remove the animated class to trigger the animation again when in view
+          entry.target.classList.remove('animated');
+        }
+      });
+    }, { threshold: 0.2 }); // Set the threshold to trigger when 30% of the card is visible
+
+    // Observe all cards
+    cards.forEach(card => observer.observe(card));
+
+    return () => {
+      // Cleanup observer when the component unmounts
+      observer.disconnect();
+    };
+  };
+  handleScrollAnimation();
+}, []);
+
+
+
+
+
+
+
   return (
     <div className="dark-app-container">
       <header className="dark-header" ref={headerRef}>
         <div className="header-glow" ref={glowRef}></div>
-        <div className="oblique kathleen" ref={kathleenRef}>Kathleen</div>
+        <div className="oblique kathleen" ref={kathleenRef}>
+          Kathleen
+        </div>
         <div className="title-row" ref={titleRowRef}>
-          <span className="pinyon-script-regular portf" ref={portfRef}>Portf</span>
+          <span className="pinyon-script-regular portf" ref={portfRef}>
+            Portf
+          </span>
           <span className="brogetta olio">Olio</span>
         </div>
         <div className="cut-line" ref={cutLineRef}></div>
-        <div className="oblique chan" ref={chanRef}>Chan</div>
+        <div className="oblique chan" ref={chanRef}>
+          Chan
+        </div>
       </header>
 
       <nav className="glass-navbar">
-        <div className="nav-name oblique" ref={navNameRef}>Kathleen Chan</div>
+        <div className="nav-name oblique" ref={navNameRef}>
+          Kathleen Chan
+        </div>
         <ul className="nav-links">
-          <li><a href="#about">about</a></li>
-          <li><a href="#projects">projects</a></li>
-          <li><a href="#contact">contact</a></li>
+          <li>
+            <a href="#about">about</a>
+          </li>
+          <li>
+            <a href="#projects">projects</a>
+          </li>
+          <li>
+            <a href="#contact">contact</a>
+          </li>
         </ul>
       </nav>
 
       <main className="dark-main">
         <section className="dark-about montserrat center">
           <h2 ref={aboutRef1} className="aboutMe float-up text-scramble">
-            A designer, explorer, and creator moving between the constellations 
-            of UX/UI, web, game, and product design.
+            A designer, explorer, and creator moving between the constellations
+            of UX/UI, web, game, graphic, and product design.
           </h2>
-          <h2 ref={aboutRef2} className="aboutMe-kat pinyon-script-regular float-up">
+          <h2
+            ref={aboutRef2}
+            className="aboutMe-kat pinyon-script-regular float-up"
+          >
             Kathleen.
           </h2>
           <p ref={aboutRef3} className="aboutMe-kat2 pixel float-up">
-          I am passionate about creating meaningful digital 
-          experiences where imagination and technical craft meet.
+            I am passionate about creating meaningful digital experiences where
           </p>
+          <p ref={imaginationRef} className="imagination pinyon-script-regular">
+            imagination
+          </p>
+          <p ref={meetsRef} className="meets pixel">
+            meets
+          </p>
+          <p ref={techRef} className="tech brogetta">
+            technical craft.
+          </p>
+
+          {/*
           <button onClick={() => setShowSecret((prev) => !prev)}>
             Reveal Secret
           </button>
           {showSecret && <p>This is a secret dark section!</p>}
+           */}
         </section>
 
-        <section className="dark-projects" id="projects">
-          <h2>Projects</h2>
+        <section className="dark-projects" ref={projectsRef}>
+          <div className="projects">
+            <h2 className="pro brogetta">Pro</h2>
+            <h2 className="jects pinyon-script-regular">jects</h2>
+          </div>
           <div className="dark-grid">
-            <div className="dark-card">Project A</div>
-            <div className="dark-card">Project B</div>
-            <div className="dark-card">Project C</div>
+            <div className="dark-card">
+              <div className="project-image">
+                <img src={umi} />
+              </div>
+              <h3 className="project-title pixel">U-mi</h3>
+              <p></p>
+            </div>
+
+            <div className="dark-card">
+              <div className="project-image">
+                <img src={oubaitori} />
+              </div>
+              <h3 className="project-title pixel">Oubaitori</h3>
+              <p></p>
+            </div>
+
+            <div className="dark-card">
+              <div className="project-image">
+                <img src={brainrot} />
+              </div>
+              <h3 className="project-title pixel">Brainrot!..ish</h3>
+              <p className="desc pixel">Design and integration of interactive multiplayer minigames.</p>
+            </div>
           </div>
         </section>
       </main>
