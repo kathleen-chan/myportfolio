@@ -47,7 +47,7 @@ export default function AboutSection() {
       const elementCenter = imaginationRect.top + imaginationRect.height / 2;
       const viewportCenter = window.innerHeight / 2;
 
-      if (Math.abs(elementCenter - viewportCenter) <= 60) {
+      if (Math.abs(elementCenter - viewportCenter) <= 70) {
         animationEnabled = true;
         scrollLocked = true;
         document.body.classList.add("lock-scroll");

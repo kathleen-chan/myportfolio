@@ -6,9 +6,9 @@ import arrow from "../assets/arrow.gif";
 import brainrot from "../assets/brainrot!...ish.png";
 import oubaitori from "../assets/oubaitori.png";
 import umi from "../assets/u-mi.png";
-import arch1 from "../assets/arch1.png";
-import arch2 from "../assets/arch2.png";
-import arch3 from "../assets/arch3.png";
+import arch1 from "../assets/arch/A100.png";
+import arch2 from "../assets/arch/A101.png";
+import arch3 from "../assets/arch/A102.png";
 import { useState, useEffect, useRef } from "react";
 import ScratchReveal from "../ScratchReveal";
   
