@@ -13,23 +13,11 @@
   margin-top: 80px;
 }
 
-.pro {
+.pro, .jects {
   position: relative;
   text-align: center;
   color: white;
   font-size: 100px;  
-}
-
-.jects {
-  position: relative;
-  text-align: center;
-  color: white;
-  font-size: 100px;
-}
-
-.project-title {
-  color: white;
-  font-size: 25px;
 }
 
 .dark-grid {

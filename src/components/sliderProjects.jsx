@@ -299,6 +299,35 @@ export default function SliderProjects() {
             </div>
           ))}
         </div>
+        <section className="gallery-section" ref={galleryRef}>
+  <div className="medias">
+    {projects2.map((project, index) => (
+      <div
+        key={index}
+        className="media"
+        onClick={() => openLightbox(project.img, index)}
+      >
+        <div className="gallery-image media-inner">
+          <img src={project.img} alt={project.title} />
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* YouTube video under gallery */}
+  <div className="youtube-video" style={{ marginTop: "200px", textAlign: "center" }}>
+  <iframe
+    width="700"
+    height="350"
+    src="https://www.youtube.com/embed/gus1iDvqTZY?si=sr4ZQFOEHRmHW4Pr"
+    title="Rover Project"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  ></iframe>
+</div>
+</section>
+
       </section>
 
       {/* Lightbox */}
