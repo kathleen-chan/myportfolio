@@ -11,7 +11,7 @@ export default function Navbar({ navNameRef }) {
   const section = document.getElementById(id);
   if (!section) return;
   let yOffset = 0;
-  if (id === "about") yOffset = -200;
+  if (id === "about") yOffset = -180;
   if (id === "projects") yOffset = 155;
   const y =
     section.getBoundingClientRect().top + window.pageYOffset + yOffset;

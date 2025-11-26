@@ -158,25 +158,30 @@ export default function SliderProjects() {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [activeList, setActiveList] = useState("slider"); // "slider" or "gallery"
+
   // lightbox controls
-  const openLightbox = (img, index) => {
+  const openLightbox = (img, index, source) => {
     setLightboxImage(img);
     setLightboxIndex(index);
+    setActiveList(source);
     setLightboxOpen(true);
   };
 
   const closeLightbox = () => setLightboxOpen(false);
 
   const nextImage = () => {
-    const idx = (lightboxIndex + 1) % projects.length;
+    const list = activeList === "slider" ? projects : projects2;
+    const idx = (lightboxIndex + 1) % list.length;
     setLightboxIndex(idx);
-    setLightboxImage(projects[idx].img);
+    setLightboxImage(list[idx].img);
   };
 
   const prevImage = () => {
-    const idx = (lightboxIndex - 1 + projects.length) % projects.length;
+    const list = activeList === "slider" ? projects : projects2;
+    const idx = (lightboxIndex - 1 + list.length) % list.length;
     setLightboxIndex(idx);
-    setLightboxImage(projects[idx].img);
+    setLightboxImage(list[idx].img);
   };
 
   useEffect(() => {
@@ -257,7 +262,7 @@ export default function SliderProjects() {
               <div
                 key={i}
                 className="slider-card"
-                onClick={() => openLightbox(p.img, i)}
+                onClick={() => openLightbox(p.img, i, "slider")}
               >
                 <div className="project-image">
                   <img src={p.img} alt={p.title} />
@@ -290,7 +295,7 @@ export default function SliderProjects() {
             <div
               key={index}
               className="media"
-              onClick={() => openLightbox(project.img, index)}
+              onClick={() => openLightbox(project.img, index, "gallery")}
             >
               <div className="gallery-image media-inner">
                 <img src={project.img} alt={project.title} />
@@ -329,7 +334,10 @@ export default function SliderProjects() {
           <div className="lightbox-content">
             <img src={lightboxImage} />
             <p className="lightbox-caption pixel">
-              {projects2[lightboxIndex].title}
+              {
+                (activeList === "slider" ? projects : projects2)[lightboxIndex]
+                  .title
+              }
             </p>
           </div>
 
