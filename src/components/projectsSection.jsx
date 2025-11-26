@@ -94,7 +94,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section className="dark-projects" ref={projectsRef}>
+    <section id="projects" className="dark-projects" ref={projectsRef}>
       <div className="projects">
         <h2 className="pro brogetta">Pro</h2>
         <h2 className="jects pinyon-script-regular">jects</h2>

@@ -127,7 +127,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section className="dark-about montserrat center">
+    <section id="about" className="dark-about montserrat center">
       <h2 ref={aboutRef1} className="aboutMe float-up text-scramble">
         A designer, explorer, and creator moving between the constellations
         of UX/UI, web, game, graphic, and product design.

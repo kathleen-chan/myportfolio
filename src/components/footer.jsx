@@ -19,6 +19,7 @@ export default function Footer() {
 
   return (
     <>
+    <section id="contact">
       <footer className="dark-footer">
         <img src={cursor} className="footer-star" />
         <div className="connect">
@@ -57,6 +58,7 @@ export default function Footer() {
           Email copied to clipboard!
         </div>
       )}
+    </section>
     </>
   );
 }
