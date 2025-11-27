@@ -1,7 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import cursor from "../assets/cursor.png";
+import Kathleen from "../assets/kathleen.jpg"
 
 export default function AboutSection() {
+  const [showHiddenPage, setShowHiddenPage] = useState(false);
   const aboutRef1 = useRef(null);
   const aboutRef2 = useRef(null);
   const aboutRef3 = useRef(null);
@@ -30,7 +32,7 @@ export default function AboutSection() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [showHiddenPage]);
 
   // Imagination scroll animation
   useEffect(() => {
@@ -128,29 +130,66 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="dark-about montserrat center">
-      <h2 ref={aboutRef1} className="aboutMe float-up text-scramble">
-        A designer, explorer, and creator moving between the constellations
-        of UX/UI, web, game, graphic, and product design.
-      </h2>
-      <h2
-        ref={aboutRef2}
-        className="aboutMe-kat pinyon-script-regular float-up"
-      >
-        Kathleen.
-      </h2>
-      <p ref={aboutRef3} className="aboutMe-kat2 pixel float-up">
-        I am passionate about creating meaningful digital experiences where
-      </p>
-      <p ref={imaginationRef} className="imagination pinyon-script-regular">
-        imagination
-      </p>
-      <p ref={meetsRef} className="meets pixel">
-        meets
-      </p>
-      <p ref={techRef} className="tech brogetta">
-        technical craft.
-      </p>
-      <img src={cursor} ref={diamondRef} className="diamond"/>
+      {!showHiddenPage ? (
+        <>
+          <h2 ref={aboutRef1} className="aboutMe float-up text-scramble">
+            A designer, explorer, and creator moving between the constellations
+            of UX/UI, web, game, graphic, and product design.
+          </h2>
+          <h2
+            ref={aboutRef2}
+            className="aboutMe-kat pinyon-script-regular float-up"
+            onClick={() => setShowHiddenPage(true)}
+          >
+            Kathleen.
+          </h2>
+          <p ref={aboutRef3} className="aboutMe-kat2 pixel float-up">
+            I am passionate about creating meaningful digital experiences where
+          </p>
+          <p ref={imaginationRef} className="imagination pinyon-script-regular">
+            imagination
+          </p>
+          <p ref={meetsRef} className="meets pixel">
+            meets
+          </p>
+          <p ref={techRef} className="tech brogetta">
+            technical craft.
+          </p>
+          <img src={cursor} ref={diamondRef} className="diamond" />
+        </>
+      ) : (
+        // Hidden about page
+        <div className="hidden-page">
+          <div className="hidden-content-wrapper">
+             <div className="hidden-text">
+          <h2 className="hidden-title pinyon-script-regular">Who am I?</h2>
+          <h2 className="hidden-sub brogetta">about me:</h2>
+          <p className="hidden-desc montserrat">
+            I study Computer Science with a specialization in game programming
+            at Stony Brook University’s Honors College. I love learning by
+            doing, rolling up my sleeves on projects that prioritize real user
+            experiences. With a background in architecture at Brooklyn Technical
+            High School, I bring experience in technical drawing and 3D
+            modeling, both digitally and by hand. I thrive on collaboration,
+            enjoy tackling challenging projects, and aim to build work that
+            truly makes an impact.
+          </p>
+          <p className="hidden-desc-sub pixel">
+            Design with purpose, build with passion.
+          </p>
+          <h2
+            className="hidden-kat pinyon-script-regular"
+            onClick={() => setShowHiddenPage(false)}
+          >
+            Kathleen.
+          </h2>
+          </div>
+          <div className="hidden-image">
+            <img src={Kathleen}/>
+          </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

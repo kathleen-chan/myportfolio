@@ -31,8 +31,15 @@
   z-index: 10;
   text-align: center;
   font-size: 80px;
+
   color: #e6addc;
+  transition: color 0.6s ease;
 }
+
+.aboutMe-kat:hover {
+  color: #ffb4a2;
+}
+
 
 .aboutMe-kat2 {
   position: relative;
@@ -84,15 +91,86 @@
   opacity: 1;
 }
 
-.dark-about button {
-  background-color: #444;
-  color: #f9d28e;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.hidden-page {
+  position: relative;
+  inset: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 100;
+  text-align: left;
 }
 
-.dark-about button:hover {
-  background-color: #666;
+.hidden-title {
+  text-align: center;
+  font-size: 80px;
+  margin-left: -80px;
+  margin-bottom: -20px;
+  color: #fff;
+}
+
+.hidden-sub{
+  text-align: center;
+  font-size: 40px;
+  margin-left: 318px;
+  margin-bottom: -20px;
+  margin-top: -50px;
+  color: #fff;
+}
+
+.hidden-desc {
+  margin-top: 50px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.hidden-desc-sub {
+  margin-top: -10px;
+  font-size: 30px;
+  text-align: left;
+}
+
+.hidden-content-wrapper {
+  display: flex; 
+  gap: 60px;               
+  max-width: 1100px; 
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: -80px;
+}
+
+.hidden-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hidden-image {
+  flex: 0 0 auto; 
+  display: flex;
+  align-items: flex-start;
+  margin-top: 120px;
+}
+
+.hidden-image img {
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.hidden-kat {
+  position: relative;
+  margin-top: -40px;
+  margin-bottom: -20px;
+  z-index: 10;
+  text-align: center;
+  font-size: 80px;
+
+  color: #e6addc;
+  transition: color 0.6s ease;
+}
+
+.hidden-kat:hover {
+  color: #ffb4a2;
 }
